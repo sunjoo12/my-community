@@ -22,7 +22,7 @@ import { toast } from 'sonner';
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
-  const { user, profile } = useAuthStore();
+  const { user, profile, reset } = useAuthStore();
   const router = useRouter();
 
   useEffect(() => {
@@ -34,9 +34,9 @@ export default function Header() {
   const handleLogout = async () => {
     const supabase = createClient();
     await supabase.auth.signOut();
+    reset();
     toast.success('로그아웃되었습니다.');
     router.push('/');
-    router.refresh();
   };
 
   return (
