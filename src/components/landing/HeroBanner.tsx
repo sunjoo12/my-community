@@ -97,7 +97,7 @@ export default function HeroBanner() {
             className='text-2xl sm:text-3xl font-bold leading-snug'
             style={{ color: '#3D2820', letterSpacing: '-0.02em' }}
           >
-            오늘의 감정을 꽃처럼<br className='hidden sm:block' /> 피워보세요 🌸
+            Blooming like a Flower,<br className='hidden sm:block' /> with your story
           </h1>
           <p
             className='mt-2 text-sm sm:text-base leading-relaxed max-w-md'
@@ -121,7 +121,7 @@ export default function HeroBanner() {
               className='inline-flex items-center gap-1.5 px-5 py-2.5 rounded-2xl text-sm font-semibold text-white transition-all hover:scale-[1.03] active:scale-[0.97]'
               style={{ backgroundColor: '#CC7058', boxShadow: '0 4px 14px rgba(204,112,88,0.35)' }}
             >
-              ✍️ 글 남기기
+              글 남기기
             </Link>
           ) : (
             <>
