@@ -1,0 +1,203 @@
+/* Pretendard 폰트 — @import는 최상단에 위치해야 함 */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================
+   블러플라워 컬러 시스템
+   ============================================================ */
+:root {
+  /* Primary — 뮤트 틸 세이지 */
+  --color-primary: #96B5B8;
+  --color-primary-light: #B8D0D4;
+  --color-primary-dark: #6A9EA4;
+
+  /* Secondary — 웜 코랄 */
+  --color-secondary: #CC7058;
+  --color-secondary-hover: #B05A46;
+
+  /* Accent — 웜 앰버 골드 */
+  --color-accent: #D4A060;
+
+  /* Background */
+  --color-bg-primary: #F4EDE8;
+  --color-bg-secondary: #96B5B8;
+  --color-bg-lavender: #C0B2BC;
+  --color-highlight: #F8F4F0;
+
+  /* Text */
+  --color-text-primary: #3D2820;
+  --color-text-secondary: #5E3C30;
+  --color-text-muted: #8A6A60;
+
+  /* Interactive */
+  --color-button-primary: #CC7058;
+  --color-button-hover: #B05A46;
+  --color-link: #6A9EA4;
+  --color-link-hover: #4A8490;
+
+  /* Utility */
+  --color-border: #E8C8BC;
+  --color-border-light: #B8D0D4;
+  --color-sage-green: #7A9E88;
+  --color-blush: #E0A8A4;
+
+  /* shadcn theme overrides */
+  --background: #F4EDE8;
+  --foreground: #3D2820;
+  --card: #FAF6F2;
+  --card-foreground: #3D2820;
+  --popover: #FAF6F2;
+  --popover-foreground: #3D2820;
+  --primary: #CC7058;
+  --primary-foreground: #FFFFFF;
+  --secondary: #96B5B8;
+  --secondary-foreground: #3D2820;
+  --muted: #F0E8E2;
+  --muted-foreground: #8A6A60;
+  --accent: #D4A060;
+  --accent-foreground: #3D2820;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: #E8C8BC;
+  --input: #E8C8BC;
+  --ring: #96B5B8;
+  --radius: 0.875rem;
+
+  --font-pretendard: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+}
+
+/* ============================================================
+   다크 모드
+   ============================================================ */
+.dark {
+  --background: #1A2628;
+  --foreground: #F4EDE8;
+  --card: #243035;
+  --card-foreground: #F4EDE8;
+  --popover: #243035;
+  --popover-foreground: #F4EDE8;
+  --primary: #E08068;
+  --primary-foreground: #1A2628;
+  --secondary: #2A2430;
+  --secondary-foreground: #F4EDE8;
+  --muted: #2A2430;
+  --muted-foreground: #A08A84;
+  --accent: #D4A060;
+  --accent-foreground: #1A2628;
+  --border: #3A2C28;
+  --input: #3A2C28;
+  --ring: #96B5B8;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+}
+
+/* ============================================================
+   CSS Reset
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* ============================================================
+   기본 스타일
+   ============================================================ */
+body {
+  font-family: var(--font-pretendard);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================
+   그라디언트 유틸리티
+   ============================================================ */
+.hero-gradient {
+  background: linear-gradient(135deg, #C0B2BC 0%, #F4EDE8 40%, #96B5B8 100%);
+}
+
+.login-gradient {
+  background: linear-gradient(135deg, #96B5B8 0%, #F4EDE8 50%, #E0A8A4 100%);
+}
+
+/* ============================================================
+   스크롤바
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F4EDE8;
+}
+::-webkit-scrollbar-thumb {
+  background: #C0B2BC;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #96B5B8;
+}
+
+/* ============================================================
+   애니메이션
+   ============================================================ */
+@keyframes float-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-float-up {
+  animation: float-up 0.4s ease forwards;
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
