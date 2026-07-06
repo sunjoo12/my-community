@@ -2,6 +2,7 @@
 
 import { createClient } from '@/lib/supabase/client';
 import GalleryFeed from '@/components/gallery/GalleryFeed';
+import HeroBanner from '@/components/landing/HeroBanner';
 import type { PostWithCounts } from '@/types';
 
 export default function HomePage() {
@@ -15,5 +16,10 @@ export default function HomePage() {
     return (data ?? []) as PostWithCounts[];
   };
 
-  return <GalleryFeed queryKey={['posts']} queryFn={queryFn} />;
+  return (
+    <>
+      <HeroBanner />
+      <GalleryFeed queryKey={['posts']} queryFn={queryFn} />
+    </>
+  );
 }
