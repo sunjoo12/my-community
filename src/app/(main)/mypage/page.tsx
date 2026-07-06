@@ -62,7 +62,7 @@ export default function MyPage() {
     },
   });
 
-  const { data: likedIds } = useQuery({
+  const { data: likedIds } = useQuery<Set<string>>({
     queryKey: ['my-likes', user?.id],
     enabled: !!user,
     queryFn: async () => {
@@ -71,7 +71,7 @@ export default function MyPage() {
         .from('likes')
         .select('post_id')
         .eq('user_id', user!.id);
-      return new Set((data ?? []).map((l: { post_id: string }) => l.post_id));
+      return new Set<string>((data ?? []).map((l: { post_id: string }) => l.post_id));
     },
   });
 
@@ -155,7 +155,7 @@ export default function MyPage() {
           ) : (
             <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4'>
               {myPosts.map((p) => (
-                <PostCard key={p.id} post={p} likedPostIds={likedIds ?? new Set()} />
+                <PostCard key={p.id} post={p} likedPostIds={likedIds ?? new Set<string>()} />
               ))}
             </div>
           )}
@@ -170,7 +170,7 @@ export default function MyPage() {
           ) : (
             <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4'>
               {likedPosts.map((p) => (
-                <PostCard key={p.id} post={p} likedPostIds={likedIds ?? new Set()} />
+                <PostCard key={p.id} post={p} likedPostIds={likedIds ?? new Set<string>()} />
               ))}
             </div>
           )}
