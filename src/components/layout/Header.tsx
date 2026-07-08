@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { Search, Edit3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -16,28 +15,17 @@ import {
 import NotificationDropdown from '@/components/notification/NotificationDropdown';
 import SearchBar from '@/components/search/SearchBar';
 import { useAuthStore } from '@/store/authStore';
-import { createClient } from '@/lib/supabase/client';
-import { toast } from 'sonner';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
-  const { user, profile, reset } = useAuthStore();
-  const router = useRouter();
+  const { user, profile } = useAuthStore();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const handleLogout = async () => {
-    const supabase = createClient();
-    await supabase.auth.signOut();
-    reset();
-    toast.success('로그아웃되었습니다.');
-    router.push('/');
-  };
 
   return (
     <>
@@ -115,11 +103,10 @@ export default function Header() {
                       <Link href='/post/write' className='w-full'>새 글 작성</Link>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem
-                      onClick={handleLogout}
-                      className='text-red-500'
-                    >
-                      로그아웃
+                    <DropdownMenuItem className='text-red-500 p-0'>
+                      <Link href='/logout' className='block w-full px-1.5 py-1'>
+                        로그아웃
+                      </Link>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
