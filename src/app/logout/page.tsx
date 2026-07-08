@@ -1,20 +1,17 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import { useAuthStore } from '@/store/authStore';
 
 export default function LogoutPage() {
-  const { reset } = useAuthStore();
-  const router = useRouter();
+  const reset = useAuthStore(s => s.reset);
 
   useEffect(() => {
-    // signOut은 백그라운드에서 실행 (API 토큰 무효화)
     const supabase = createClient();
     supabase.auth.signOut().catch(() => {});
 
-    // 즉시 쿠키 삭제
+    // sb- 쿠키 즉시 삭제
     document.cookie.split(';').forEach(c => {
       const key = c.trim().split('=')[0];
       if (key.startsWith('sb-')) {
@@ -22,12 +19,13 @@ export default function LogoutPage() {
       }
     });
 
-    // 스토어 초기화
     reset();
 
-    // 홈으로 리다이렉트 (basePath 자동 적용됨)
-    router.replace('/');
-  }, [reset, router]);
+    // /logout/ → /  로 치환해서 사이트 홈으로 이동
+    const home = window.location.href.replace(/\/logout\/?$/, '/');
+    window.location.replace(home);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '50vh', color: '#8A6A60' }}>
