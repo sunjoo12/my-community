@@ -9,11 +9,29 @@ export default function LogoutPage() {
 
   useEffect(() => {
     const doLogout = async () => {
-      const supabase = createClient();
-      await supabase.auth.signOut();
+      try {
+        const supabase = createClient();
+        await Promise.race([
+          supabase.auth.signOut(),
+          new Promise<void>(resolve => setTimeout(resolve, 3000)),
+        ]);
+      } catch {
+        // signOut 실패해도 강제 쿠키 삭제 진행
+      }
+
+      // Supabase 세션 쿠키 강제 삭제
+      document.cookie.split(';').forEach(c => {
+        const key = c.trim().split('=')[0];
+        if (key.startsWith('sb-')) {
+          document.cookie = `${key}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+        }
+      });
+
       reset();
-      window.location.replace(process.env.NEXT_PUBLIC_BASE_PATH ? `${process.env.NEXT_PUBLIC_BASE_PATH}/` : '/');
+      const base = process.env.NEXT_PUBLIC_SITE_URL ?? '';
+      window.location.replace(`${base}/`);
     };
+
     doLogout();
   }, [reset]);
 
